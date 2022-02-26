@@ -1,0 +1,16 @@
+{
+  "name": "books_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "book_api.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node book_api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
