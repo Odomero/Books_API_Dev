@@ -5,7 +5,7 @@
   "main": "book_api.js",
   "scripts": {
     "dev": "nodemon",
-    "start": "node book_api.js"
+    "start": "nodemon book_api.js"
   },
   "keywords": [],
   "author": "",
