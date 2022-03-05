@@ -18,5 +18,5 @@ app.get('/', (req,resp) => {
 app.use('/bookcat_api', bookroute);
 
 
-// Create a server to listen at port 3000
+// Create a server to listen at port 9090
 app.listen(PORT, () => console.log("Books API running on port %s", PORT))
