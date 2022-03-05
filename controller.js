@@ -23,12 +23,14 @@ const addBook = (req, resp) => {
            resp.send("Title already exist"); 
         }
         //check if author exist
-        pool.query(query.checkAuthorExist,[author],(error,output) => {
+        else { 
+            pool.query(query.checkAuthorExist,[author],(error,output) => {
             const noAuthor = !output.rows.length
             if (noAuthor) {
                 pool.query(query.addAuthor, [author], (error, output) => {
                     if (error) throw error;
-                    pool.query(query.checkAuthorExist,[author],(error,output) => {
+                    else {
+                        pool.query(query.checkAuthorExist,[author],(error,output) => {
                         for (let row of output.rows) {
                             const author_id = row["author_id"] 
                             pool.query(query.addBook, [title,author_id,year,url,book_cat_id], (error, output) => {
@@ -38,9 +40,11 @@ const addBook = (req, resp) => {
                             });                     
                         };
                     });
+                };
                 })
-            };
-            for (let row of output.rows) {
+            }
+            else {
+                for (let row of output.rows) {
                 const author_id = row["author_id"] 
                 pool.query(query.addBook, [title,author_id,year,url,book_cat_id], (error, output) => {
                     if (error) throw error;
@@ -48,7 +52,9 @@ const addBook = (req, resp) => {
                     console.log("Book Added")
                 });
             };
+        };
         });
+    };
     });   
 };
 
@@ -59,12 +65,14 @@ const deleteBook = (req, resp) => {
         const noBookFound = !output.rows.length;
         if (noBookFound) {
             resp.send("You cannot delete Book. Book not found")
-        }  
-        pool.query(query.deleteBook,[title],(error,output) => {
-            if (error) throw error;
-            resp.status(200).send("Book Deleted Succesfuly");
-            console.log("Book Deleted")
+        }
+        else {
+            pool.query(query.deleteBook,[title],(error,output) => {
+                if (error) throw error;
+                resp.status(200).send("Book Deleted Succesfuly");
+                console.log("Book Deleted")
         })
+    }
     });
 };
 
